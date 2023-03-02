@@ -1,0 +1,15 @@
+<label ng-show="showLabel">{{ serverName }}</label>
+<input type="text" class="form-control" (input)="onUpdateServer($event)" />
+
+<button
+  [routerLink]="['/servers', 5, 'edit']"
+  [queryParams]="{ allowEdit: '1' }"
+  fragment="loading"
+  class="btn btn-primary"
+  [disabled]="!allowServer"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<button (click)="onAddQuery(2)" class="btn btn-primary">query parmas</button>
+<p>{{ serverStatus }}</p>

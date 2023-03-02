@@ -1,0 +1,26 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="projectName">Project Name</label>
+    <input
+      type="text"
+      id="projectName"
+      class="form-control"
+      formControlname="projectName"
+    />
+  </div>
+  <div class="form-group">
+    <label for="mail">E-mail</label>
+    <input type="email" id="mail" class="form-control" formControlName="mail" />
+  </div>
+  <div class="form-group">
+    <label for="sub">Project Status</label>
+    <select class="form-control" id="sub" formControlName="projectStatus">
+      <option value="Stable">Stable</option>
+      <option value="Critical">Critical</option>
+      <option value="Finished">Finished</option>
+    </select>
+  </div>
+  <button class="btn-primary" [disabled]="!this.signupForm.valid">
+    Submit
+  </button>
+</form>

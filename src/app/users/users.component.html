@@ -1,0 +1,16 @@
+<p>Userloaded</p>
+<p>Corectly</p>
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <a
+      [routerLink]="['/users', user.id, user.name]"
+      *ngFor="let user of users"
+      style="display: flex; align-items: center"
+      >{{ user.name }}</a
+    >
+  </div>
+  <button (click)="onActivate()">Act</button>
+</div>
+<div class="col-xs-12 col-sm-4">
+  <router-outlet></router-outlet>
+</div>

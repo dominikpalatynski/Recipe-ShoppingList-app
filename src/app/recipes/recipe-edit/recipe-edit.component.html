@@ -1,0 +1,57 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" formControlName="title" />
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      type="text"
+      class="form-control"
+      formControlName="description"
+      cols="10"
+      rows="5"
+    ></textarea>
+  </div>
+  <div class="row">
+    <div class="col-xs-12" formArrayName="ingredients">
+      <div
+        class="row"
+        *ngFor="let ingrControl of control; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="col-xs-8">
+          <label for="">Ingredient Name</label>
+          <input type="text" class="form-control" formControlName="name" />
+        </div>
+        <div class="col-xs-2">
+          <label for="amount">Amount</label>
+          <input type="number" class="form-control" formControlName="amount" />
+        </div>
+        <div class="col-xs-2">
+          <button type="button" class="btn btn-danger" (click)="onResetIng(i)">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="onGetIngredient()"
+        >
+          Add Ingredient
+        </button>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+    Save
+  </button>
+  <button type="button" class="btn btn-success" (click)="onDiscard()">
+    Discard
+  </button>
+</form>

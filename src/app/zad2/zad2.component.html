@@ -1,0 +1,22 @@
+<p>zad2 works!</p>
+<input type="text" class="form-control" [(ngModel)]="name" />
+<button [disabled]="name === ''" (click)="name = ''">reset</button>
+<button [disabled]="name === ''" (click)="toggleShow()">Show</button>
+<p *ngIf="showP; else noName">{{ name }}</p>
+<ng-template #noName>
+  <p>Does not include name</p>
+</ng-template>
+<button (click)="onCreate()">Create</button>
+<button (click)="onDelete()">Delete</button>
+<p [ngStyle]="{ backgroundColor: getColor() }">{{ serverStatus }}</p>
+
+<app-server *ngFor="let server of servers"></app-server>
+
+<button (click)="createDetail()">Create detail</button><br />
+<button (click)="showD()">Show Details</button>
+<div *ngIf="showDet">
+  <app-server
+    *ngFor="let tab of table; let i = index"
+    [ngStyle]="{ backgroundColor: i >= 5 ? 'blue' : 'transparent' }"
+  ></app-server>
+</div>
