@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-10">
+    <router-outlet> </router-outlet>
+    <hr />
+    <h3>List of ingredients</h3>
+    <ul class="list-group">
+      <a
+        [routerLink]="[i, 'edit']"
+        routerLinkActive="active"
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="let ing of ingredients; let i = index"
+        (click)="onTest(i)"
+      >
+        {{ ing.name }} amount{{ ing.amount }}
+      </a>
+    </ul>
+  </div>
+</div>

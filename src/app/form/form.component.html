@@ -1,0 +1,53 @@
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+  <div id="user-data" ngModelGroup="userData">
+    <div class="form-group">
+      <label for="email">Email </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        ngModel
+        required
+        email
+        #email
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <p *ngIf="checkP" style="text-decoration: red">Password is require</p>
+      <label for="password">Password </label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        ngModel
+        required
+        password
+        #password
+        class="form-control"
+      />
+    </div>
+  </div>
+  <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+  <button type="button" (click)="onCreatePost(f.value.userData.email)">
+    Pull request
+  </button>
+  <button class="btn btn-primary" (click)="onClearPost()">Clear Post</button>
+
+  <div class="form-group">
+    <label for="sub">Subsription</label>
+    <select name="sub" id="sub" class="form-control" [ngModel]="basic">
+      <option value="basic">Basic</option>
+      <option value="advanced">Advanced</option>
+      <option value="pro">Pro</option>
+    </select>
+  </div>
+</form>
+<label *ngIf="isLoading && !error">Data is fetching</label>
+<p *ngFor="let i of loadedPosts">{{ i.title }}</p>
+
+<div class="alert alert-danger" *ngIf="error">
+  <h1>An occurred!!!</h1>
+  <p>{{ error }}</p>
+  <button class="btn btn-danger" (click)="onErrorHandle()">Okay</button>
+</div>
