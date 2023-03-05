@@ -1,0 +1,19 @@
+.recipe__cont {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.app-recipe-item {
+  width: calc(33.33% - 10px);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.app-recipe-item::hover {
+  width: 40%; /* zwiększamy szerokość elementu */
+  height: auto;
+  z-index: 1;
+  transform: translateY(-10px); /* przesuwamy element w górę */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* dodajemy cień */
+}

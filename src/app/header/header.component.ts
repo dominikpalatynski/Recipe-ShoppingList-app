@@ -34,9 +34,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit() {
     this.userSub = this.authService.user.subscribe((user) => {
-      this.isAuthenticated = !!user;
-      console.log(this.isAuthenticated);
-      console.log(this.authService.user);
+      // this.isAuthenticated = !!user;
+      if (user) {
+        this.isAuthenticated = true;
+      } else {
+        this.isAuthenticated = false;
+      }
+      console.log(user);
     });
   }
   ngOnDestroy() {
@@ -56,5 +60,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   onFetchData() {
     this.recipeHttp.onFetchRecipe().subscribe();
+  }
+  onLogOut() {
+    this.authService.logOut();
   }
 }

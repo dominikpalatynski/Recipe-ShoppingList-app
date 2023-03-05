@@ -5,10 +5,12 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <app-recipe-item
-      *ngFor="let r of recipes; let i = index"
-      [index]="i"
-      [recipe]="r"
-    ></app-recipe-item>
+    <div class="recipe__cont">
+      <app-recipe-item
+        *ngFor="let r of recipes; let i = index"
+        [index]="i"
+        [recipe]="r"
+      ></app-recipe-item>
+    </div>
   </div>
 </div>

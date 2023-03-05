@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { BoundElementProperty } from '@angular/compiler';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -77,26 +78,20 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     public route: ActivatedRoute,
- 
+    private auth: AuthService
   ) {}
 
-  onServiceTest() {
-
-  }
+  onServiceTest() {}
   ngOnInit() {
-
-  
+    this.auth.autoLogin();
   }
   ngOnDestroy() {
     this.activatedSub.unsubscribe();
   }
   ngOnChange() {
     console.log(this.loadFeature);
-   
   }
-  onDebug() {
-    
-  }
+  onDebug() {}
   onLoadServers() {
     this.router.navigate(['servers']);
   }
