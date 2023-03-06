@@ -15,16 +15,10 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 
-
-
 import { DropDownDirective } from './shared/dropdown.directive';
-
-
-
 
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeService } from './recipes/recipe.service';
-
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './auth-guard.service';
@@ -33,15 +27,15 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeResolverService } from './recipe-resolver.service';
 import { AuthComponent } from './auth/auth.component';
-
+import { CanDeactivateGuard } from './recipes/deactivate-recipe.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipe', pathMatch: 'full' },
-  {path: 'auth',component: AuthComponent},
+  { path: 'auth', component: AuthComponent },
   {
     path: 'recipe',
     component: RecipesComponent,
-
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -50,16 +44,16 @@ const appRoutes: Routes = [
       {
         path: 'new',
         component: RecipeEditComponent,
+        canDeactivate: [CanDeactivateGuard],
       },
       {
         path: ':id',
         component: RecipeDetailComponent,
-       
       },
       {
         path: ':id/edit',
         component: RecipeEditComponent,
-        
+        canDeactivate: [CanDeactivateGuard],
       },
     ],
   },
@@ -72,8 +66,6 @@ const appRoutes: Routes = [
       { path: ':id/edit', component: ShoppingEditComponent },
     ],
   },
- 
-
 
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/not-found', pathMatch: 'full' },

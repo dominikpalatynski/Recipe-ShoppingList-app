@@ -38,6 +38,8 @@ import { RecipePostService } from './recipes/recipe-post.serive';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor-service';
+import { CanDeactivateGuard } from './recipes/deactivate-recipe.service';
+import { WorkingCopyComponent } from './working-copy/working-copy.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor-service';
     FilterPipe,
     AuthComponent,
     LoadingSpinnerComponent,
+    WorkingCopyComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor-service';
 
     PostsService,
     RecipePostService,
+    CanDeactivateGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

@@ -19,11 +19,16 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   user = new BehaviorSubject<User>(null);
+  private tokenExpirationTimer: any;
 
   logOut() {
     this.user.next(null);
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
   }
 
   // autoLogin() {
@@ -75,6 +80,11 @@ export class AuthService {
     this.router.navigate(['/recipe']); // Always navigate to recipe page
     this.user.next(loadedUser);
     console.log(loadedUser);
+  }
+  autoLogOut(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logOut();
+    }, expirationDuration);
   }
 
   signup(email: string, password: string) {
@@ -134,6 +144,7 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user));
     this.user.next(user);
     console.log(user);
+    this.autoLogOut(expiresIn * 1000);
   }
 
   private handleError(errorRes: HttpErrorResponse) {

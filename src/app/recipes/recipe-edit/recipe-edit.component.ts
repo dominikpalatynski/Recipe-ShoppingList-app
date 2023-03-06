@@ -1,7 +1,9 @@
 import { LowerCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs-compat';
+import { CanComponentDeactivate } from '../deactivate-recipe.service';
 import { RecipePostService } from '../recipe-post.serive';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -11,7 +13,9 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css'],
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent
+  implements OnInit, OnChanges, CanComponentDeactivate
+{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -21,6 +25,14 @@ export class RecipeEditComponent implements OnInit {
   id: number;
   editMode: boolean = false;
   form: FormGroup;
+  testCalue = true;
+  show: boolean = true;
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.form.dirty) {
+      return confirm('test');
+    }
+    return true;
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -28,6 +40,11 @@ export class RecipeEditComponent implements OnInit {
       this.editMode = params['id'] != null;
       this.initForm();
     });
+  }
+  ngOnChanges() {
+    if (this.form.dirty) {
+      this.show = true;
+    }
   }
   initForm() {
     let recipe = this.rec.getOneRecipe(this.id);

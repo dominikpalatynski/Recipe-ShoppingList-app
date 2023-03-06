@@ -1,0 +1,7 @@
+<div class="modal" [ngClass]="{ show: show }">
+  <div class="modal-content">
+    <p>Czy na pewno chcesz porzucić zmiany?</p>
+    <button class="btn btn-secondary">Tak</button>
+    <button class="btn btn-primary" (click)="show = false">Nie</button>
+  </div>
+</div>
